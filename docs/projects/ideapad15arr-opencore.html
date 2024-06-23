@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ideapad15arr-opencore | uw0s</title>
+        <link href="data:," rel="icon">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+
+    <body>
+        <div id="navbar">
+            <span id="title">uw0s</span>
+            <a href="../">home/</a>
+            <a href="parcel-tracker.html">parcel-tracker/</a>
+            <a href="meddisc.html">meddisc/</a>
+            <a href="ideapad15arr-opencore.html">ideapad15arr-opencore/</a>
+        </div>
+        <div id="content">
+            <h2>ideapad15arr-opencore</h2>
+            <p>An effort to boot macOS on my personal laptop <a href="https://github.com/uw0s/ideapad15arr-opencore">[repo]</a>. The EFI folder is confirmed to partially work on Lenovo Ideapad 330-15ARR for macOS Ventura 13.6.7. Feature support is documented in the <a href="https://github.com/uw0s/ideapad15arr-opencore/blob/master/README.md#features">README</a>. It is recommended that everyone constructs their own EFI folder for their hardware.</p>
+            <h2>Installation</h2>
+            <p>Format a drive as FAT32 and transfer the following folders onto it:</p>
+            <pre><code>USB<br>├─ com.apple.recovery.boot/<br>└─ EFI/</code></pre>
+            <p>Boot into the Recovery and install macOS as normal.</p>
+            <p>macOS Recovery images can be retrieved using <a href="https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/macrecovery">macrecovery</a>.</p>
+        </div>
+    </body>
+
+</html>
