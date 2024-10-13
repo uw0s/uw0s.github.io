@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>deck-builder | uw0s</title>
+    <link href="data:," rel="icon">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <span id="title">uw0s</span>
+        <a href="../">home/</a>
+        <a href="parcel-tracker.html">parcel-tracker/</a>
+        <a href="meddisc.html">meddisc/</a>
+        <a href="ideapad15arr-opencore.html">ideapad15arr-opencore/</a>
+        <a href="deck-builder.html">deck-builder/</a>
+    </div>
+    <div id="content">
+        <h2>deck-builder</h2>
+        <p>deck-builder <a href="https://github.com/uw0s/deck-builder">[code]</a> <a href="https://uw0s.github.io/deck-builder">[demo]</a> is a web-based tool for building custom card decks.</p>
+        <h2>Configuration</h2>
+        <p>The <a href="https://github.com/uw0s/deck-builder/blob/main/docs/config.json">config.json</a> file can be modified to configure the deck-builder. Below are the options currently available:</p>
+        <pre><code>{<br>    "deckSizeLimit": 21,<br>    "cardLimitPerDeck": 7,<br>    "paths": {<br>        "cardJson": "prm/cards.json",<br>        "images": "prm/img/"<br>    },<br>    "cardDimensions": {<br>        "width": 367,<br>        "height": 512<br>    },<br>    "cardsPerRow": 7<br>}</code></pre>
+        <ul>
+            <li><b>deckSizeLimit</b>: Sets the maximum number of cards allowed in the deck.</li>
+            <li><b>cardLimitPerDeck</b>: Sets the maximum number of copies of a single card.</li>
+            <li><b>paths</b>:
+                <ul>
+                    <li><b>images</b>: Path to the card images directory.</li>
+                    <li><b>cardJson</b>: Path to the cards.json file containing card data.</li>
+                </ul>
+            </li>
+            <li><b>cardDimensions</b>: Defines the card image width and height.</li>
+            <li><b>cardsPerRow</b>: Sets the number of cards displayed per row when exporting the deck to an image.</li>
+        </ul>
+        <h2>Card Data</h2>
+        <p>The <a href="https://github.com/uw0s/deck-builder/blob/main/docs/prm/cards.json">cards.json</a> file should consist of multiple card entries, with each entry containing the following properties:</p>
+        <pre><code>{<br>    "000010": {<br>        "image": "000010.webp",<br>        "name": "Placeholder_0",<br>        "description": "Placeholder description."<br>    }<br>}</code></pre>
+        <ul>
+            <li><strong>cardId:</strong> A unique identifier for each card.</li>
+            <li><strong>name:</strong> The card's displayed name.</li>
+            <li><strong>description:</strong> The card's description, displayed as a tooltip when hovering over the card.</li>
+            <li><strong>image:</strong> The filename of the card's image, relative to the images directory.</li>
+        </ul>
+    </div>
+</body>
+
+</html>
