@@ -23,10 +23,11 @@
         <p>deck-builder <a href="https://github.com/uw0s/deck-builder">[code]</a> <a href="https://uw0s.github.io/deck-builder">[demo]</a> is a web-based tool for building custom card decks.</p>
         <h2>Configuration</h2>
         <p>The <a href="https://github.com/uw0s/deck-builder/blob/main/docs/config.json">config.json</a> file can be modified to configure the deck-builder. Below are the options currently available:</p>
-        <pre><code>{<br>    "deckSizeLimit": 21,<br>    "cardLimitPerDeck": 7,<br>    "paths": {<br>        "cardJson": "prm/cards.json",<br>        "images": "prm/img/"<br>    },<br>    "cardDimensions": {<br>        "width": 367,<br>        "height": 512<br>    },<br>    "cardsPerRow": 7<br>}</code></pre>
+        <pre><code>{<br>    "deckSizeLimit": 21,<br>    "cardLimitPerDeck": 7,<br>    "useRemoteImages": false,<br>    "paths": {<br>        "cardJson": "prm/cards.json",<br>        "images": "prm/img/"<br>    },<br>    "cardDimensions": {<br>        "width": 367,<br>        "height": 512<br>    },<br>    "cardsPerRow": 7<br>}</code></pre>
         <ul>
             <li><b>deckSizeLimit</b>: Sets the maximum number of cards allowed in the deck.</li>
             <li><b>cardLimitPerDeck</b>: Sets the maximum number of copies of a single card.</li>
+            <li><b>useRemoteImages</b>: Boolean that determines whether to load card images from remote URLs or local files.</li>
             <li><b>paths</b>:
                 <ul>
                     <li><b>images</b>: Path to the card images directory.</li>
@@ -43,7 +44,7 @@
             <li><strong>cardId:</strong> A unique identifier for each card.</li>
             <li><strong>name:</strong> The card's displayed name.</li>
             <li><strong>description:</strong> The card's description, displayed as a tooltip when hovering over the card.</li>
-            <li><strong>image:</strong> The filename of the card's image, relative to the images directory.</li>
+            <li><strong>image:</strong> The URL or local filename of the card's image. Local filename should be relative to the images directory.</li>
         </ul>
     </div>
 </body>
