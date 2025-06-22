@@ -34,11 +34,12 @@
         </ul>
         <h2>Card Data</h2>
         <p>The <a href="https://github.com/uw0s/deck-builder/blob/main/docs/prm/cards.json">cards.json</a> file contains the game specific deckbuilding parameters and the card data entries.</p>
-        <pre><code>{<br>    "deckSizeLimit": 21,<br>    "cardLimitPerDeck": 7,<br>    "useRemoteImages": false,<br>    "cardDimensions": {<br>        "width": 367,<br>        "height": 512<br>    },<br>    "cardData": {<br>        "000010": {<br>            "image": "000010.webp",<br>            "name": "Placeholder_0",<br>            "description": "Placeholder description."<br>    }<br>}</code></pre>
+        <pre><code>{<br>    "deckSizeLimit": 21,<br>    "cardLimitPerDeck": 7,<br>    "useRemoteImages": false,<br>    "corsProxy": "",<br>    "cardDimensions": {<br>        "width": 367,<br>        "height": 512<br>    },<br>    "cardData": {<br>        "000010": {<br>            "image": "000010.webp",<br>            "name": "Placeholder_0",<br>            "description": "Placeholder description."<br>    }<br>}</code></pre>
         <ul>
             <li><b>deckSizeLimit</b>: Sets the maximum number of cards allowed in the deck.</li>
             <li><b>cardLimitPerDeck</b>: Sets the maximum number of copies of a single card.</li>
             <li><b>useRemoteImages</b>: Boolean that determines whether to load card images from remote URLs or local files.</li>
+            <li><b>corsProxy</b>: Sets the CORS proxy URL to be used for remote URLs.</li>
             <li><b>cardDimensions</b>: Defines the card image width and height.</li>
             <li><b>cardsPerRow</b>: Sets the number of cards displayed per row when exporting the deck to an image.</li>
             <li><b>cardData</b>:
