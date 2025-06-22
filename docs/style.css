@@ -3,7 +3,8 @@ body {
     padding: 0;
 }
 
-#navbar {
+#navbar, 
+#content {
     margin: 20px;
 }
 
@@ -15,11 +16,6 @@ body {
 #navbar a {
     margin: 0 10px;
     text-decoration: none;
-}
-
-
-#content {
-    margin: 20px;
 }
 
 h2 {
@@ -39,4 +35,24 @@ pre {
 code {
     display: block;
     font-family: monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+    
+    pre {
+        background-color: #2d2d2d;
+        border-color: #444;
+    }
+    
+    #navbar a {
+        color: #e0e0e0;
+    }
+    
+    #navbar a:hover {
+        color: #fff;
+    }
 }
