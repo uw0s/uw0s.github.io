@@ -48,6 +48,10 @@ code {
         border-color: #444;
     }
     
+    a {
+        color: #66b3ff;
+    }
+    
     #navbar a {
         color: #e0e0e0;
     }

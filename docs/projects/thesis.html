@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>thesis | uw0s</title>
+        <link href="data:," rel="icon">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+
+    <body>
+        <div id="navbar">
+            <span id="title">uw0s</span>
+            <a href="../">home/</a>
+            <a href="thesis.html">thesis/</a>
+            <a href="parcel-tracker.html">parcel-tracker/</a>
+            <a href="meddisc.html">meddisc/</a>
+            <a href="ideapad15arr-opencore.html">ideapad15arr-opencore/</a>
+            <a href="deck-builder.html">deck-builder/</a>
+        </div>
+        <div id="content">
+            <h2>Removing unwanted objects from photos</h2>
+            <p>A web-based implementation of my diploma thesis on semi-automated object removal from photographs <a href="https://github.com/uw0s/removing-unwanted-objects-from-photos">[code]</a> <a href="https://uw0s.github.io/removing-unwanted-objects-from-photos">[demo]</a>.</p>
+            <h2>Method Overview</h2>
+            <p>The method combines computer vision techniques to achieve the goal and consists of five main stages.</p>
+            <h3>Image Alignment</h3>
+            <p>Feature detection is performed using the ORB (Oriented FAST and Rotated BRIEF) algorithm [1]. The original thesis implementation used SURF (Speeded-Up Robust Features) [2].</p>
+            <ol>
+                <li>Detect keypoints in both the original and secondary images</li>
+                <li>Match keypoint descriptors between images using a nearest neighbor search</li>
+                <li>Calculate homography matrix from matched keypoint pairs</li>
+                <li>Apply a projective transformation to align the secondary image with the original</li>
+            </ol>
+            <p>The homography matrix for the projective transformation has the form:</p>
+            <math display="block">
+                <mrow>
+                    <mi>H</mi>
+                    <mo>=</mo>
+                    <mo>[</mo>
+                    <mtable>
+                        <mtr>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>11</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>12</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>13</mn>
+                                </msub>
+                            </mtd>
+                        </mtr>
+                        <mtr>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>21</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>22</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>23</mn>
+                                </msub>
+                            </mtd>
+                        </mtr>
+                        <mtr>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>31</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <msub>
+                                    <mi>h</mi>
+                                    <mn>32</mn>
+                                </msub>
+                            </mtd>
+                            <mtd>
+                                <mn>1</mn>
+                            </mtd>
+                        </mtr>
+                    </mtable>
+                    <mo>]</mo>
+                </mrow>
+            </math>
+            <h3>Region Selection</h3>
+            <p>The user defines the Region of Interest (ROI) containing the unwanted object using a polygon selection tool.</p>
+            <h3>Region Segmentation</h3>
+            <p>K-means clustering is applied to segment both:</p>
+            <ul>
+                <li><b>ROI:</b> The selected region in the aligned secondary image</li>
+                <li><b>Surrounding Region (SR):</b> The area around the ROI in the original image</li>
+            </ul>
+            <h3>Color Harmonization</h3>
+            <p>Each segment in the ROI is matched with the most similar segment in the SR based on color similarity. The matching criterion uses Euclidean distance in RGB color space:</p>
+            <math display="block">
+                <mrow>
+                    <msub>
+                        <mi>d</mi>
+                        <mi>E</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msqrt>
+                        <msup>
+                            <mrow>
+                                <mo>(</mo>
+                                <msub>
+                                    <mi>R</mi>
+                                    <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mi>R</mi>
+                                    <mn>1</mn>
+                                </msub>
+                                <mo>)</mo>
+                            </mrow>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <msup>
+                            <mrow>
+                                <mo>(</mo>
+                                <msub>
+                                    <mi>G</mi>
+                                    <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mi>G</mi>
+                                    <mn>1</mn>
+                                </msub>
+                                <mo>)</mo>
+                            </mrow>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <msup>
+                            <mrow>
+                                <mo>(</mo>
+                                <msub>
+                                    <mi>B</mi>
+                                    <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mi>B</mi>
+                                    <mn>1</mn>
+                                </msub>
+                                <mo>)</mo>
+                            </mrow>
+                            <mn>2</mn>
+                        </msup>
+                    </msqrt>
+                </mrow>
+            </math>
+            <p>Color correction is then performed using one of two methods:</p>
+            <ul>
+                <li><b>Statistical Color Correction:</b> Matches the mean and standard deviation of the color distributions between corresponding segments [3].</li>
+                <li><b>Histogram Matching:</b> Aligns the full color histograms between corresponding segments.</li>
+            </ul>
+            <h3>Region Replacement</h3>
+            <p>The color-harmonized segments from the aligned secondary image are used to replace their corresponding segments in the original image.</p>
+            <h2>References</h2>
+            <ol>
+                <li>E. Rublee, V. Rabaud, K. Konolige and G. Bradski, "ORB: An efficient alternative to SIFT or SURF," 2011 International Conference on Computer Vision, Barcelona, Spain, 2011, pp. 2564-2571. <a href="https://doi.org/10.1109/ICCV.2011.6126544">[doi]</a></li>
+                <li>H. Bay, T. Tuytelaars and L. Van Gool, "SURF: Speeded Up Robust Features," in Computer Vision – ECCV 2006, Berlin, Heidelberg, Springer Berlin Heidelberg, 2006, pp. 404-417. <a href="https://doi.org/10.1007/11744023_32">[doi]</a></li>
+                <li>E. Reinhard, M. Adhikhmin, B. Gooch and P. Shirley, "Color transfer between images," IEEE Computer Graphics and Applications, vol. 21, no. 4, pp. 34-41, 2001. <a href="https://doi.org/10.1109/38.946629">[doi]</a></li>
+            </ol>
+        </div>
+    </body>
+
+</html>
